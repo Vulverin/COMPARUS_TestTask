@@ -58,6 +58,13 @@ public class LongMapImpl<V> implements LongMap<V> {
             return value;
         }
         while (currentNode != null){
+            if(currentNode.next == null && currentNode.next.key == key){
+                V value = currentNode.next.value;
+                currentNode.next = null;
+                lastNode = currentNode;
+                size--;
+                return value;
+            }
             if(currentNode.key == key){
                 V value = currentNode.value;
                 currentNode = currentNode.next;
@@ -128,12 +135,14 @@ public class LongMapImpl<V> implements LongMap<V> {
             currentNode = currentNode.next;
             tempCurrentNode = null;
         }
+        firstNode = null;
+        lastNode = null;
         size = 0;
     }
 
     private static class Node<V> {
         private V value;
-        private long key;
+        private final long key;
         private Node<V> next;
 
         public Node(V value, long key, Node<V> next) {
