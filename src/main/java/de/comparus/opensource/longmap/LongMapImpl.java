@@ -58,7 +58,7 @@ public class LongMapImpl<V> implements LongMap<V> {
             return value;
         }
         while (currentNode != null){
-            if(currentNode.next == null && currentNode.next.key == key){
+            if(currentNode.next.next == null && currentNode.next.key == key){
                 V value = currentNode.next.value;
                 currentNode.next = null;
                 lastNode = currentNode;
